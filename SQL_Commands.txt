@@ -1,0 +1,50 @@
+-- Create the Startups table
+CREATE TABLE Startups (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    founded_year INT,
+    industry VARCHAR(100),
+    description TEXT,
+    website VARCHAR(255)
+);
+
+-- Create the Employees table
+CREATE TABLE Employees (
+    id SERIAL PRIMARY KEY,
+    startup_id INT REFERENCES Startups(id) ON DELETE CASCADE,
+    name VARCHAR(255) NOT NULL,
+    position VARCHAR(100),
+    linkedin VARCHAR(255),
+    tech_stack TEXT,
+    years_at_company INT,
+    age INT
+);
+
+
+
+
+-- Insert sample data into Startups table
+INSERT INTO Startups (name, founded_year, industry, description, website) VALUES
+('N26', 2013, 'Fintech', 'A mobile bank providing banking services with no hidden fees.', 'https://n26.com'),
+('Delivery Hero', 2011, 'Food Delivery', 'An online food delivery service operating worldwide.', 'https://deliveryhero.com'),
+('Blinkist', 2012, 'EdTech', 'A platform for bite-sized learning and book summaries.', 'https://blinkist.com'),
+('SoundCloud', 2007, 'Music Tech', 'A platform for sharing and discovering music and audio content.', 'https://soundcloud.com');
+
+-- Insert sample data into Employees table
+INSERT INTO Employees (startup_id, name, position, linkedin, tech_stack, years_at_company, age) VALUES
+-- N26 Employees
+(1, 'Valentin Stalf', 'CEO', 'https://linkedin.com/in/valentinstalf', 'Leadership, Fintech Strategy', 10, 38),
+(1, 'Maximilian Tayenthal', 'CFO', 'https://linkedin.com/in/maximiliantayenthal', 'Finance, Banking Operations', 10, 39),
+
+-- Delivery Hero Employees
+(2, 'Niklas Östberg', 'CEO', 'https://linkedin.com/in/niklasoestberg', 'Leadership, Food Delivery', 13, 42),
+(2, 'Emmanuel Thomassin', 'CFO', 'https://linkedin.com/in/emmanuelthomassin', 'Finance, E-commerce', 11, 45),
+
+-- Blinkist Employees
+(3, 'Holger Seim', 'CEO', 'https://linkedin.com/in/holgerseim', 'Leadership, Product Management', 12, 35),
+(3, 'Niklas Jansen', 'Co-Founder', 'https://linkedin.com/in/niklasjansen', 'Tech Stack: Python, React', 12, 36),
+
+-- SoundCloud Employees
+(4, 'Alexander Ljung', 'Founder', 'https://linkedin.com/in/alexanderljung', 'Leadership, Audio Engineering', 17, 41),
+(4, 'Eric Wahlforss', 'Co-Founder', 'https://linkedin.com/in/ericwahlforss', 'Leadership, Product Development', 17, 40);
+
